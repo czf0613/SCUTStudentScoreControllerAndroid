@@ -1,5 +1,6 @@
 package com.czf.student
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -17,7 +18,9 @@ class MainActivity : AppCompatActivity() {
 
         val countDownTimer=object :CountDownTimer(3000,30){
             override fun onFinish() {
-
+                val intent=Intent(this@MainActivity,LoginActivity::class.java)
+                startActivity(intent)
+                this@MainActivity.finish()
             }
 
             override fun onTick(millisUntilFinished: Long) {
