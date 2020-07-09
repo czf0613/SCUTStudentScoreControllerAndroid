@@ -2,8 +2,8 @@ package com.czf.student.db.capsule;
 
 import android.content.Context;
 
-import GreenDao.DaoMaster;
-import GreenDao.DaoSession;
+import gen.DaoMaster;
+import gen.DaoSession;
 
 //DaoManager的封装，为数据库查询manager工厂化处理做准备
 public class DaoManger
