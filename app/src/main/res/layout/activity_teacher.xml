@@ -7,4 +7,29 @@
     tools:context=".activities.TeacherActivity"
     android:orientation="vertical">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/mainFragment"/>
+
+    <nl.joery.animatedbottombar.AnimatedBottomBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragmentSelector"
+        app:abb_tabs="@menu/teacher_tab"
+        android:background="#444"
+        android:elevation="5dp"
+        app:abb_animationDuration="200"
+        app:abb_animationInterpolator="@android:anim/accelerate_decelerate_interpolator"
+        app:abb_indicatorAnimation="slide"
+        app:abb_indicatorColor="#B867C8"
+        app:abb_indicatorHeight="4dp"
+        app:abb_indicatorLocation="bottom"
+        app:abb_indicatorAppearance="round"
+        app:abb_indicatorMargin="5dp"
+        app:abb_selectedIndex="0"
+        app:abb_selectedTabType="icon"
+        app:abb_tabAnimation="slide"
+        app:abb_tabColorSelected="#B867C8"/>
 </LinearLayout>

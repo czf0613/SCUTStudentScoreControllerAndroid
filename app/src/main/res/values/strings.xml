@@ -43,4 +43,10 @@
     <string name="classroom_hint">请输入班级</string>
     <string name="birthday">生日：</string>
     <string name="enrollment_time">入学时间：</string>
+    <string name="self_information">个人信息</string>
+    <string name="select_course_info">查询选课信息</string>
+    <string name="select_course">选课</string>
+    <string name="score">查询成绩</string>
+    <string name="average_score">查询平均成绩</string>
+    <string name="edit_score">修改成绩</string>
 </resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/selfInfo"
+        android:icon="@mipmap/self"
+        android:title="@string/self_information"/>
+
+    <item
+        android:id="@+id/selectCourseInfo"
+        android:icon="@mipmap/select_course_info"
+        android:title="@string/select_course_info"/>
+
+    <item
+        android:id="@+id/selectCourse"
+        android:icon="@mipmap/select_course"
+        android:title="@string/select_course"/>
+
+    <item
+        android:id="@+id/findScore"
+        android:icon="@mipmap/score"
+        android:title="@string/score"/>
+</menu>

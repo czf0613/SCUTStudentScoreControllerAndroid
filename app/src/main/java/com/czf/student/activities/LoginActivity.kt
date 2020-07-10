@@ -22,13 +22,15 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        userNameEditText.setText(LocalPreferences.getString("userName")?:"")
+        userNameEditText.setSelection(userNameEditText.text.length)
+
+        passwordEditText.setText(LocalPreferences.getString("password")?:"")
     }
 
     override fun onStart() {
         super.onStart()
-
-        userNameEditText.setText(LocalPreferences.getString("userName")?:"")
-        passwordEditText.setText(LocalPreferences.getString("password")?:"")
 
         forgetPassword.setOnClickListener {
             SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE)
@@ -84,8 +86,12 @@ class LoginActivity : AppCompatActivity() {
                     200->{
                         LocalPreferences.put("userName",userNameEditText.text.toString())
                         LocalPreferences.put("password",passwordEditText.text.toString())
-                        val intent=Intent(this@LoginActivity,
-                            StudentActivity::class.java)
+                        val intent=when(type){
+                            "student" -> Intent(this@LoginActivity, StudentActivity::class.java)
+                            "teacher" -> Intent(this@LoginActivity, TeacherActivity::class.java)
+                            "administer" -> Intent(this@LoginActivity, AdministerActivity::class.java)
+                            else -> Intent(this@LoginActivity, StudentActivity::class.java)
+                        }
                         startActivity(intent)
                         this@LoginActivity.finish()
                     }

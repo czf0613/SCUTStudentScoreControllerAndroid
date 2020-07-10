@@ -15,9 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="n">
-        <activity android:name=".activities.AdministerActivity" />
-        <activity android:name=".activities.TeacherActivity" />
-        <activity android:name=".activities.StudentActivity" />
+        <activity android:name=".activities.AdministerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.TeacherActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.StudentActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.MainActivity"
             android:configChanges="orientation|keyboardHidden"
