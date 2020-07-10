@@ -24,7 +24,7 @@ public class LocalCacheDao extends AbstractDao<LocalCache, Long> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Id = new Property(0, long.class, "id", true, "_id");
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Label = new Property(1, String.class, "label", false, "label");
         public final static Property Content = new Property(2, String.class, "content", false, "content");
     }
@@ -42,7 +42,7 @@ public class LocalCacheDao extends AbstractDao<LocalCache, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"LOCAL_CACHE\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"label\" TEXT," + // 1: label
                 "\"content\" TEXT);"); // 2: content
         // Add Indexes
@@ -59,7 +59,11 @@ public class LocalCacheDao extends AbstractDao<LocalCache, Long> {
     @Override
     protected final void bindValues(DatabaseStatement stmt, LocalCache entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
+ 
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
  
         String label = entity.getLabel();
         if (label != null) {
@@ -75,7 +79,11 @@ public class LocalCacheDao extends AbstractDao<LocalCache, Long> {
     @Override
     protected final void bindValues(SQLiteStatement stmt, LocalCache entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
+ 
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
  
         String label = entity.getLabel();
         if (label != null) {
@@ -90,13 +98,13 @@ public class LocalCacheDao extends AbstractDao<LocalCache, Long> {
 
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.getLong(offset + 0);
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     @Override
     public LocalCache readEntity(Cursor cursor, int offset) {
         LocalCache entity = new LocalCache( //
-            cursor.getLong(offset + 0), // id
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // label
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // content
         );
@@ -105,7 +113,7 @@ public class LocalCacheDao extends AbstractDao<LocalCache, Long> {
      
     @Override
     public void readEntity(Cursor cursor, LocalCache entity, int offset) {
-        entity.setId(cursor.getLong(offset + 0));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setLabel(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setContent(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
      }
@@ -127,7 +135,7 @@ public class LocalCacheDao extends AbstractDao<LocalCache, Long> {
 
     @Override
     public boolean hasKey(LocalCache entity) {
-        throw new UnsupportedOperationException("Unsupported for entities with a non-null key");
+        return entity.getId() != null;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.czf.student
+package com.czf.student.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,8 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.czf.student.R
+import com.czf.student.dialogs.Register
 import com.czf.student.helper.LocalPreferences
 import com.czf.student.helper.NetWork
 import com.czf.student.helper.StringResourceGetter
@@ -17,8 +19,6 @@ import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
-    var type:String="student"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -26,6 +26,10 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
+        userNameEditText.setText(LocalPreferences.getString("userName")?:"")
+        passwordEditText.setText(LocalPreferences.getString("password")?:"")
+
         forgetPassword.setOnClickListener {
             SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE)
                 .setTitleText(R.string.forget_password)
@@ -35,44 +39,53 @@ class LoginActivity : AppCompatActivity() {
         }
 
         register.setOnClickListener {
-
+            Register(this).show()
         }
 
         setIP.setOnClickListener {
             val editText=EditText(this)
             editText.maxLines=1
             editText.hint= StringResourceGetter.getString(R.string.url_hint)
-            editText.setText(LocalPreferences.getString("ip")?:"")
+            editText.setText(LocalPreferences.getString("ip")?:"http://")
+            editText.setSelection(editText.text.length)
 
             AlertDialog.Builder(this)
                 .setTitle(R.string.set_ip)
                 .setView(editText)
                 .setCancelable(false)
-                .setNegativeButton(R.string.cancel) { _,_ -> }
-                .setPositiveButton(R.string.confirm) {_,_ ->
-                    val pattern= Pattern.compile("((http|ftp|https)://)(([a-zA-Z0-9\\._-]+\\.[a-zA-Z]{2,6})|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,5})")
+                .setNegativeButton(R.string.cancel) { _, _ -> }
+                .setPositiveButton(R.string.confirm) { _, _ ->
+                    val pattern= Pattern.compile("((http|https)://)(([a-zA-Z0-9\\._-]+\\.[a-zA-Z]{2,6})|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,5})")
                     val matcher=pattern.matcher(editText.text.toString())
                     if(matcher.matches()) {
-                        AestheticDialog.showEmotion(this,StringResourceGetter.getString(R.string.success),StringResourceGetter.getString(R.string.match_url),AestheticDialog.SUCCESS)
                         LocalPreferences.put("ip", editText.text.toString())
+                        AestheticDialog.showEmotion(this,StringResourceGetter.getString(
+                            R.string.success
+                        ),StringResourceGetter.getString(R.string.match_url),AestheticDialog.SUCCESS)
                     }
                     else
-                        AestheticDialog.showEmotion(this,StringResourceGetter.getString(R.string.fail),StringResourceGetter.getString(R.string.mismatch_url),AestheticDialog.ERROR)
+                        AestheticDialog.showEmotion(this,StringResourceGetter.getString(
+                            R.string.fail
+                        ),StringResourceGetter.getString(R.string.mismatch_url),AestheticDialog.ERROR)
                 }
                 .show()
         }
 
         login.setOnClickListener {
-            when(userSelector.checkedRadioButtonId){
-                R.id.student -> type="student"
-                R.id.teacher -> type="teacher"
-                R.id.administer -> type="administer"
+            val type:String=when(userSelector.checkedRadioButtonId){
+                R.id.student -> "student"
+                R.id.teacher -> "teacher"
+                R.id.administer -> "administer"
+                else -> "student"
             }
 
             GlobalScope.launch(Dispatchers.Main){
                 when(NetWork.login(type,userNameEditText.text.toString(),passwordEditText.text.toString())){
                     200->{
-                        val intent=Intent(this@LoginActivity,StudentActivity::class.java)
+                        LocalPreferences.put("userName",userNameEditText.text.toString())
+                        LocalPreferences.put("password",passwordEditText.text.toString())
+                        val intent=Intent(this@LoginActivity,
+                            StudentActivity::class.java)
                         startActivity(intent)
                         this@LoginActivity.finish()
                     }

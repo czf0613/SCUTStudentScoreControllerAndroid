@@ -5,7 +5,7 @@ import org.greenrobot.greendao.annotation.*;
 @Entity
 public class LocalCache {
     @Id(autoincrement = true)
-    private long id;
+    private Long id;
 
     @Property(nameInDb = "label")
     @Index(unique = true)
@@ -18,18 +18,18 @@ public class LocalCache {
     public LocalCache() {
     }
 
-    @Generated(hash = 72238312)
-    public LocalCache(long id, String label, String content) {
+    @Generated(hash = 1608620580)
+    public LocalCache(Long id, String label, String content) {
         this.id = id;
         this.label = label;
         this.content = content;
     }
 
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

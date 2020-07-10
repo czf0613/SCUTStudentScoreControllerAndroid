@@ -1,12 +1,12 @@
 package com.czf.student.helper
 
+import com.alibaba.fastjson.JSON
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
-import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 object NetWork {
@@ -26,7 +26,7 @@ object NetWork {
         return withContext(Dispatchers.IO){
             val formBody=FormBody.Builder()
                 .add("userName", userName)
-                .add("password", password)
+                .add("password", SHA.passwordEncode(password))
                 .build()
 
             val request=Request.Builder()
@@ -38,8 +38,31 @@ object NetWork {
                 val response: Response = shortClient.newCall(request).execute()
                 response.code
             }
-            catch (e:IOException){
+            catch (e:Exception){
                 404
+            }
+        }
+    }
+
+    suspend fun register(type:String,userName:String,password:String,content:Any):Int {
+        return withContext(Dispatchers.IO){
+            val formBody=FormBody.Builder()
+                .add("userName", userName)
+                .add("password", SHA.passwordEncode(password))
+                .add("content",JSON.toJSONString(content))
+                .build()
+
+            val request=Request.Builder()
+                .url("${LocalPreferences.getString("ip")}/$type/register")
+                .post(formBody)
+                .build()
+
+            try {
+                val response: Response = shortClient.newCall(request).execute()
+                response.code
+            }
+            catch (e:Exception){
+                500
             }
         }
     }

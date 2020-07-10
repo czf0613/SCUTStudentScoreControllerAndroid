@@ -1,9 +1,10 @@
-package com.czf.student
+package com.czf.student.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import com.czf.student.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -18,7 +19,8 @@ class MainActivity : AppCompatActivity() {
 
         val countDownTimer=object :CountDownTimer(3000,30){
             override fun onFinish() {
-                val intent=Intent(this@MainActivity,LoginActivity::class.java)
+                val intent=Intent(this@MainActivity,
+                    LoginActivity::class.java)
                 startActivity(intent)
                 this@MainActivity.finish()
             }

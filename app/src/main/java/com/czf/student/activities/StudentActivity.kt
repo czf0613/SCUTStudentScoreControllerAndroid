@@ -1,7 +1,8 @@
-package com.czf.student
+package com.czf.student.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.czf.student.R
 
 class StudentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

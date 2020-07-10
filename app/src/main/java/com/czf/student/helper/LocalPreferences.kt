@@ -6,6 +6,7 @@ import com.czf.student.db.capsule.ManagerFactory
 import gen.LocalCacheDao
 
 object LocalPreferences {
+    @JvmStatic
     private val localCacheManager=ManagerFactory.getLocalCacheManager()
 
     @JvmStatic
