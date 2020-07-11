@@ -1,5 +1,6 @@
 package com.czf.student.helper
 
+import android.util.Log
 import com.alibaba.fastjson.JSON
 import com.czf.student.db.LocalCache
 import com.czf.student.db.capsule.ManagerFactory
@@ -60,6 +61,7 @@ object LocalPreferences {
             exist = LocalCache()
             exist.label=label
         }
+        Log.v("object",clazz.name)
         exist.content= JSON.toJSONString(content)
         localCacheManager.save(exist)
     }

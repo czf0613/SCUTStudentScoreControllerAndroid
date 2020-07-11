@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/selected_course"
+        android:layout_margin="10dp"
+        android:textSize="25sp"/>
+
+    <com.baoyz.widget.PullRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/firstPullRefresh">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/selectedCourses"
+            android:layout_margin="5dp"/>
+    </com.baoyz.widget.PullRefreshLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/course_can_select"
+        android:layout_margin="10dp"
+        android:textSize="25sp"/>
+
+    <com.baoyz.widget.PullRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/secondPullRefresh">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/coursesToSelect"
+            android:layout_margin="5dp"/>
+    </com.baoyz.widget.PullRefreshLayout>
+</LinearLayout>

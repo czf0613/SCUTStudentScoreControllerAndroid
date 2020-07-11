@@ -29,7 +29,9 @@
     <string name="success">成功</string>
     <string name="register_success">注册成功</string>
     <string name="fail">失败</string>
+    <string name="none">没有符合条件的搜索结果</string>
     <string name="unknown_error">未知错误</string>
+    <string name="unknown">未知</string>
     <string name="name">姓名：</string>
     <string name="gender">性别：</string>
     <string name="name_hint">请输入姓名</string>
@@ -46,7 +48,21 @@
     <string name="self_information">个人信息</string>
     <string name="select_course_info">查询选课信息</string>
     <string name="select_course">选课</string>
+    <string name="selected_course">已选课程：</string>
+    <string name="course_can_select">可选课程：</string>
+    <string name="course_id">课程id：</string>
+    <string name="course_name">课程名称：</string>
+    <string name="course_teachers">课程教师：</string>
+    <string name="course_credit">课程学分：</string>
+    <string name="course_start_date">开始时间：</string>
+    <string name="course_end_date">结束时间：</string>
+    <string name="select_course_success">选课成功</string>
+    <string name="select_course_fail">选课失败</string>
+    <string name="remove_course_success">退选成功</string>
+    <string name="remove_course_fail">退选失败</string>
     <string name="score">查询成绩</string>
+    <string name="search_hint">请输入课程id或课程名</string>
+    <string name="course_score">成绩：</string>
     <string name="average_score">查询平均成绩</string>
     <string name="edit_score">修改成绩</string>
 </resources>
