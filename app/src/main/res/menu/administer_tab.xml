@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/selfInfo"
-        android:icon="@mipmap/self"
-        android:title="@string/self_information"/>
+        android:id="@+id/editSelfInfo"
+        android:icon="@mipmap/edit"
+        android:title="@string/edit_information"/>
 
     <item
         android:id="@+id/findScore"
         android:icon="@mipmap/score"
-        android:title="@string/score"/>
+        android:title="@string/search_and_edit_score"/>
 
     <item
         android:id="@+id/selectCourseInfo"
-        android:icon="@mipmap/select_course_info"
+        android:icon="@mipmap/select_course"
         android:title="@string/select_course_info"/>
 
     <item
-        android:id="@+id/editScore"
-        android:icon="@mipmap/edit"
-        android:title="@string/edit_score"/>
+        android:id="@+id/addCourse"
+        android:icon="@mipmap/plus"
+        android:title="@string/add_course"/>
 </menu>

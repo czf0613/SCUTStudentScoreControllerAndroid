@@ -27,6 +27,11 @@ class LoginActivity : AppCompatActivity() {
         userNameEditText.setSelection(userNameEditText.text.length)
 
         passwordEditText.setText(LocalPreferences.getString("password")?:"")
+        when(LocalPreferences.getInt("type")?:0){
+            0 -> student.isChecked=true
+            1 -> teacher.isChecked=true
+            2 -> administer.isChecked=true
+        }
     }
 
     override fun onStart() {

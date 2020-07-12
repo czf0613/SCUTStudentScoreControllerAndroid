@@ -47,10 +47,12 @@
     <string name="birthday">生日：</string>
     <string name="enrollment_time">入学时间：</string>
     <string name="self_information">个人信息</string>
+    <string name="edit_information">修改信息</string>
     <string name="select_course_info">查询选课信息</string>
     <string name="select_course">选课</string>
     <string name="selected_course">已选课程：</string>
     <string name="course_can_select">可选课程：</string>
+    <string name="add_course">添加课程</string>
     <string name="course_id">课程id：</string>
     <string name="course_name">课程名称：</string>
     <string name="course_teachers">课程教师：</string>
@@ -62,8 +64,11 @@
     <string name="remove_course_success">退选成功</string>
     <string name="remove_course_fail">退选失败</string>
     <string name="score">查询成绩</string>
+    <string name="search_and_edit_score">查询&amp;修改成绩</string>
     <string name="search_hint">请输入课程id或课程名</string>
     <string name="teacher_search_hint">请输入学生id</string>
+    <string name="enter_course_id">请输入课程id</string>
+    <string name="user_id_hint">请输入用户id</string>
     <string name="course_score">成绩：</string>
     <string name="average_score">查询平均成绩</string>
     <string name="my_teaching_avg">我任教课程的平均成绩：</string>
@@ -71,5 +76,12 @@
     <string name="edit_score">修改成绩</string>
     <string name="modify_success">修改成功</string>
     <string name="modify_fail">修改失败</string>
+    <string name="modify_could_fail">（以下部分信息的修改可能无效）</string>
+    <string name="modify_hint">请输入学生id、教师id或课程id</string>
     <string name="type_error">数据类型错误，已使用缺省值</string>
+    <string name="individual">个人成绩</string>
+    <string name="group">集体</string>
+    <string name="student">学生</string>
+    <string name="teacher">教师</string>
+    <string name="teacher_id_format_hint">用半角逗号隔开</string>
 </resources>

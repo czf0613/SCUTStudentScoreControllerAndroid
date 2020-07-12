@@ -40,10 +40,10 @@ class Register(context: Context) : Dialog(context) {
         super.onStart()
         birthday.setOnClickListener {
             DatePickerDialog(context,simpleDateFormat.parse(birthday.text.toString()),object :DatePickerDialog.DatePickerListener{
-                override fun dateChange(dateString: String) {
-                    birthday.text = dateString
-                }
-            }).show()
+            override fun dateChange(dateString: String) {
+                birthday.text = dateString
+            }
+        }).show()
         }
 
         enrollmentTime.setOnClickListener {

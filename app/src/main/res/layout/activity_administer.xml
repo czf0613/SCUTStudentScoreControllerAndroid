@@ -29,7 +29,7 @@
         app:abb_indicatorAppearance="round"
         app:abb_indicatorMargin="5dp"
         app:abb_selectedIndex="0"
-        app:abb_selectedTabType="icon"
+        app:abb_selectedTabType="text"
         app:abb_tabAnimation="slide"
         app:abb_tabColorSelected="#B867C8"/>
 </LinearLayout>

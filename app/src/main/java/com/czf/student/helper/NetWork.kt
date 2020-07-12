@@ -33,8 +33,14 @@ object NetWork {
             try {
                 val response: Response = shortClient.newCall(request).execute()
                 val code=response.code
-                if(code==200)
+                if(code==200) {
                     LocalPreferences.put("id", response.body?.string()?.toInt()?:0)
+                    when(type) {
+                        "student" -> LocalPreferences.put("type", 0)
+                        "teacher" -> LocalPreferences.put("type", 1)
+                        "administer" -> LocalPreferences.put("type", 2)
+                    }
+                }
                 code
             }
             catch (e:Exception){
@@ -106,10 +112,50 @@ object NetWork {
         }
     }
 
+    suspend fun getCourseInfo(id:Int):Course?{
+        return withContext(Dispatchers.IO){
+            val request=Request.Builder()
+                .url("${LocalPreferences.getString("ip")}/administer/getInfo/course/$id")
+                .get()
+                .build()
+
+            try {
+                val response= shortClient.newCall(request).execute()
+                if(response.code==200)
+                    JSON.parseObject(response.body?.string(),Course::class.java)
+                else
+                    null
+            }
+            catch (e:Exception){
+                null
+            }
+        }
+    }
+
     suspend fun getCourses(id:Int,type:String="all"):List<Course>{
         return withContext(Dispatchers.IO){
             val request=Request.Builder()
                 .url("${LocalPreferences.getString("ip")}/student/$id/courses/$type")
+                .get()
+                .build()
+
+            try{
+                val response= shortClient.newCall(request).execute()
+                if(response.code==200)
+                    JSON.parseArray(response.body?.string(),Course::class.java)
+                else
+                    emptyList()
+            }
+            catch (e:Exception){
+                emptyList<Course>()
+            }
+        }
+    }
+
+    suspend fun getTeacherCourses(id:Int):List<Course>{
+        return withContext(Dispatchers.IO){
+            val request=Request.Builder()
+                .url("${LocalPreferences.getString("ip")}/administer/teacherCourse/$id")
                 .get()
                 .build()
 
@@ -228,6 +274,22 @@ object NetWork {
         }
     }
 
+    suspend fun getOverallAvgScore():List<CourseScore>{
+        return withContext(Dispatchers.IO){
+            val request=Request.Builder()
+                .url("${LocalPreferences.getString("ip")}/administer/avg/all")
+                .get()
+                .build()
+
+            val response= shortClient.newCall(request).execute()
+
+            if(response.code==200)
+                JSON.parseArray(response.body!!.string(),CourseScore::class.java)
+            else
+                emptyList()
+        }
+    }
+
     suspend fun modifyScore(stuId:Int,courseId:Int,score:Double):Boolean {
         return withContext(Dispatchers.IO){
             val scoreObject=Score(stuId, courseId, score)
@@ -238,6 +300,40 @@ object NetWork {
 
             val request=Request.Builder()
                 .url("${LocalPreferences.getString("ip")}/teacher/modifyScore")
+                .post(formBody)
+                .build()
+
+            val response= shortClient.newCall(request).execute()
+
+            response.code==200
+        }
+    }
+
+    suspend fun superModify(type:String,content:Any):Boolean{
+        return withContext(Dispatchers.IO){
+            val formBody=FormBody.Builder()
+                .add("content",JSON.toJSONString(content))
+                .build()
+
+            val request=Request.Builder()
+                .url("${LocalPreferences.getString("ip")}/administer/modify/$type")
+                .post(formBody)
+                .build()
+
+            val response= shortClient.newCall(request).execute()
+
+            response.code==200
+        }
+    }
+
+    suspend fun addCourse(content:Course):Boolean{
+        return withContext(Dispatchers.IO){
+            val formBody=FormBody.Builder()
+                .add("content",JSON.toJSONString(content))
+                .build()
+
+            val request=Request.Builder()
+                .url("${LocalPreferences.getString("ip")}/administer/addCourse")
                 .post(formBody)
                 .build()
 
