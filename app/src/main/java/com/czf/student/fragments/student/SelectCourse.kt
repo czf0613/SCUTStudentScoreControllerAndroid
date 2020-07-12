@@ -21,6 +21,7 @@ import com.czf.student.helper.StringResourceGetter
 import kotlinx.android.synthetic.main.fragment_student_select_course.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -71,6 +72,7 @@ class SelectCourse:Fragment() {
                         val result=NetWork.selectCourse(LocalPreferences.getInt("id")?:1, listOf(course.id))
                         if(result) {
                             PopUpNews.showGoodNews(activity!!, StringResourceGetter.getString(R.string.select_course_success))
+                            delay(300)
                             refresh()
                         }
                         else
@@ -85,6 +87,7 @@ class SelectCourse:Fragment() {
                         val result=NetWork.removeCourse(LocalPreferences.getInt("id")?:1, course.id)
                         if(result) {
                             PopUpNews.showGoodNews(activity!!,StringResourceGetter.getString(R.string.remove_course_success))
+                            delay(300)
                             refresh()
                         }
                         else

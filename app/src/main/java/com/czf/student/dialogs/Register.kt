@@ -91,6 +91,7 @@ class Register(context: Context) : Dialog(context) {
 
             val gender = when(genderRadioGroup.checkedRadioButtonId) {
                 R.id.male -> 1
+                R.id.female -> 0
                 else -> 2
             }
 
@@ -104,11 +105,11 @@ class Register(context: Context) : Dialog(context) {
             GlobalScope.launch(Dispatchers.Main) {
                 val result=when(type){
                     "student"->{
-                        val student=Student(nameEditText.text.toString(),gender,gradeEditText.text.toString(),majorEditText.text.toString(),classroomEditText.text.toString(),Date(simpleDateFormat.parse(birthday.text.toString())!!.time),Date(simpleDateFormat.parse(enrollmentTime.text.toString())!!.time))
+                        val student=Student(0,nameEditText.text.toString(),gender,gradeEditText.text.toString(),majorEditText.text.toString(),classroomEditText.text.toString(),Date(simpleDateFormat.parse(birthday.text.toString())!!.time),Date(simpleDateFormat.parse(enrollmentTime.text.toString())!!.time))
                         NetWork.register(type,userNameEditText.text.toString(),passwordEditText.text.toString(),student)
                     }
                     "teacher"->{
-                        val teacher=Teacher(nameEditText.text.toString(),gender,gradeEditText.text.toString(),majorEditText.text.toString())
+                        val teacher=Teacher(0,nameEditText.text.toString(),gender,majorEditText.text.toString(), emptyList())
                         NetWork.register(type,userNameEditText.text.toString(),passwordEditText.text.toString(),teacher)
                     }
                     "administer"->{

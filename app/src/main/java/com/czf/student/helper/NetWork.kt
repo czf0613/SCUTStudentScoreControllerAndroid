@@ -2,9 +2,7 @@ package com.czf.student.helper
 
 import com.alibaba.fastjson.JSON
 import com.czf.student.R
-import com.czf.student.beans.Course
-import com.czf.student.beans.CourseScore
-import com.czf.student.beans.Student
+import com.czf.student.beans.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.FormBody
@@ -14,11 +12,11 @@ import okhttp3.Response
 import java.util.concurrent.TimeUnit
 
 object NetWork {
-    private val shortClient=OkHttpClient.Builder()
+    private val shortClient by lazy { OkHttpClient.Builder()
         .connectTimeout(5, TimeUnit.SECONDS)
         .writeTimeout(5, TimeUnit.SECONDS)
         .readTimeout(5, TimeUnit.SECONDS)
-        .build()
+        .build() }
 
     suspend fun login(type:String,userName:String,password:String):Int {
         return withContext(Dispatchers.IO){
@@ -88,6 +86,26 @@ object NetWork {
         }
     }
 
+    suspend fun getTeacherInfo(id:Int):Teacher?{
+        return withContext(Dispatchers.IO){
+            val request=Request.Builder()
+                .url("${LocalPreferences.getString("ip")}/teacher/$id/self")
+                .get()
+                .build()
+
+            try {
+                val response= shortClient.newCall(request).execute()
+                if(response.code==200)
+                    JSON.parseObject(response.body?.string(),Teacher::class.java)
+                else
+                    null
+            }
+            catch (e:Exception){
+                null
+            }
+        }
+    }
+
     suspend fun getCourses(id:Int,type:String="all"):List<Course>{
         return withContext(Dispatchers.IO){
             val request=Request.Builder()
@@ -118,7 +136,7 @@ object NetWork {
             try {
                 val response = shortClient.newCall(request).execute()
                 if (response.code == 200)
-                    response.body!!.string()!!
+                    response.body!!.string()
                 else
                     StringResourceGetter.getString(R.string.none)
             }
@@ -175,6 +193,57 @@ object NetWork {
                 JSON.parseArray(response.body!!.string(),CourseScore::class.java)
             else
                 emptyList()
+        }
+    }
+
+    suspend fun getSingleStudentScore(id:Int,stuId:Int):List<CourseScore>{
+        return withContext(Dispatchers.IO){
+            val request=Request.Builder()
+                .url("${LocalPreferences.getString("ip")}/teacher/$id/studentScore/$stuId")
+                .get()
+                .build()
+
+            val response= shortClient.newCall(request).execute()
+
+            if(response.code==200)
+                JSON.parseArray(response.body!!.string(),CourseScore::class.java)
+            else
+                emptyList()
+        }
+    }
+
+    suspend fun getAvgScore(id:Int):List<CourseScore>{
+        return withContext(Dispatchers.IO){
+            val request=Request.Builder()
+                .url("${LocalPreferences.getString("ip")}/teacher/$id/avg")
+                .get()
+                .build()
+
+            val response= shortClient.newCall(request).execute()
+
+            if(response.code==200)
+                JSON.parseArray(response.body!!.string(),CourseScore::class.java)
+            else
+                emptyList()
+        }
+    }
+
+    suspend fun modifyScore(stuId:Int,courseId:Int,score:Double):Boolean {
+        return withContext(Dispatchers.IO){
+            val scoreObject=Score(stuId, courseId, score)
+
+            val formBody=FormBody.Builder()
+                .add("content",JSON.toJSONString(scoreObject))
+                .build()
+
+            val request=Request.Builder()
+                .url("${LocalPreferences.getString("ip")}/teacher/modifyScore")
+                .post(formBody)
+                .build()
+
+            val response= shortClient.newCall(request).execute()
+
+            response.code==200
         }
     }
 }

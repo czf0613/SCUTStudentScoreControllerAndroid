@@ -1,4 +1,4 @@
-package com.czf.student.fragments.student
+package com.czf.student.fragments.teacher
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,8 +14,6 @@ import kotlinx.android.synthetic.main.fragment_self_information.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.*
 
 class SelfInfo:Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -26,20 +24,15 @@ class SelfInfo:Fragment() {
         super.onStart()
         Glide.with(this).load(R.mipmap.person).into(icon)
         GlobalScope.launch(Dispatchers.Main) {
-            val student=NetWork.getStudentInfo(LocalPreferences.getInt("id")?:1)
-            val simpleDateFormat=SimpleDateFormat("yyyy-MM-dd", Locale.CHINA)
-            userId.text=student?.id.toString()
-            name.text = student?.name?:StringResourceGetter.getString(R.string.unknown)
-            gender.text=when(student?.gender?:1){
+            val teacher=NetWork.getTeacherInfo(LocalPreferences.getInt("id")?:1)
+            userId.text=teacher?.id.toString()
+            name.text = teacher?.name?:StringResourceGetter.getString(R.string.unknown)
+            gender.text=when(teacher?.gender?:1){
                 1 -> StringResourceGetter.getString(R.string.male)
                 0 -> StringResourceGetter.getString(R.string.female)
                 else -> StringResourceGetter.getString(R.string.unknown)
             }
-            birthday.text=simpleDateFormat.format(student?.birthday?:System.currentTimeMillis())
-            grade.text=student?.grade?:StringResourceGetter.getString(R.string.unknown)
-            major.text=student?.major?:StringResourceGetter.getString(R.string.unknown)
-            classroom.text=student?.clazz?:StringResourceGetter.getString(R.string.unknown)
-            enrollmentTime.text=simpleDateFormat.format(student?.enrollmentTime?:System.currentTimeMillis())
+            major.text=teacher?.major?:StringResourceGetter.getString(R.string.unknown)
         }
     }
 }

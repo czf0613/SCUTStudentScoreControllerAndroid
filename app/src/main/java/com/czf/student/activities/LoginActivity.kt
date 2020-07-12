@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
                 .setTitle(R.string.set_ip)
                 .setView(editText)
                 .setCancelable(false)
-                .setNegativeButton(R.string.cancel) { _, _ -> }
+                .setNegativeButton(R.string.cancel,null)
                 .setPositiveButton(R.string.confirm) { _, _ ->
                     val pattern= Pattern.compile("((http|https)://)(([a-zA-Z0-9\\._-]+\\.[a-zA-Z]{2,6})|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,5})")
                     val matcher=pattern.matcher(editText.text.toString())
