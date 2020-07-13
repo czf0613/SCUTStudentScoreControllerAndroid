@@ -1,5 +1,6 @@
 package com.czf.student.fragments.administer
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,20 +8,20 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.czf.student.R
 import com.czf.student.beans.Student
 import com.czf.student.helper.NetWork
 import com.czf.student.helper.StringResourceGetter
 import kotlinx.android.synthetic.main.fragment_self_information.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.sql.Date
 import java.text.SimpleDateFormat
 import java.util.*
 
-class StudentInfo(private val stuId:Int):Fragment() {
+class StudentInfo(private val stuId:Int): Fragment() {
+    @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_self_information,null)
     }
@@ -30,12 +31,12 @@ class StudentInfo(private val stuId:Int):Fragment() {
     override fun onStart() {
         super.onStart()
         Glide.with(this).load(R.mipmap.person).into(icon)
-        GlobalScope.launch(Dispatchers.Main) {
+        lifecycleScope.launch {
             student=NetWork.getStudentInfo(stuId)?: Student(0,"",0,"","","", Date(System.currentTimeMillis()), Date(System.currentTimeMillis()))
             val simpleDateFormat=SimpleDateFormat("yyyy-MM-dd", Locale.CHINA)
             userId.text= student.id.toString()
-            name.text = student.name ?:StringResourceGetter.getString(R.string.unknown)
-            gender.text=when(student.gender ?:1){
+            name.text = student.name
+            gender.text=when(student.gender){
                 1 -> StringResourceGetter.getString(R.string.male)
                 0 -> StringResourceGetter.getString(R.string.female)
                 else -> StringResourceGetter.getString(R.string.unknown)

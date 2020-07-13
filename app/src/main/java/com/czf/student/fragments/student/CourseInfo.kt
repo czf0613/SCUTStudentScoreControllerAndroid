@@ -11,20 +11,20 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.czf.student.R
 import com.czf.student.beans.Course
 import com.czf.student.helper.LocalPreferences
 import com.czf.student.helper.NetWork
 import kotlinx.android.synthetic.main.fragment_student_select_course.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CourseInfo:Fragment() {
+class CourseInfo: Fragment() {
+    @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_student_select_course,null)
     }
@@ -72,7 +72,7 @@ class CourseInfo:Fragment() {
             courseName.text=course.courseName
 
             val courseTeacher:TextView=view.findViewById(R.id.courseTeacher)
-            GlobalScope.launch(Dispatchers.Main) { courseTeacher.text=NetWork.getTeacherNamesWithId(course.teachers?: emptyList()) }
+            lifecycleScope.launch { courseTeacher.text=NetWork.getTeacherNamesWithId(course.teachers?: emptyList()) }
 
             val courseCredit:TextView=view.findViewById(R.id.courseCredit)
             courseCredit.text=String.format("%.1f",course.credit)
@@ -99,11 +99,11 @@ class CourseInfo:Fragment() {
     }
 
     private fun refresh(){
-        GlobalScope.launch(Dispatchers.Main) {
+        lifecycleScope.launch {
             val selectedCourse= ArrayList<Course>(NetWork.getCourses(LocalPreferences.getInt("id")?:1,"selected"))
             selectedCourses.adapter=CourseInfoAdapter(selectedCourse)
         }
-        GlobalScope.launch(Dispatchers.Main) {
+        lifecycleScope.launch {
             val chooseAbleCourses= ArrayList<Course>(NetWork.getCourses(LocalPreferences.getInt("id")?:1,"selectable"))
             coursesToSelect.adapter=CourseInfoAdapter(chooseAbleCourses)
         }

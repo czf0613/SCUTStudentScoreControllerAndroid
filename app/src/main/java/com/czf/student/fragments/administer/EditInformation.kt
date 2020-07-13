@@ -1,20 +1,22 @@
 package com.czf.student.fragments.administer
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.czf.student.R
 import com.czf.student.dialogs.PopUpNews
 import com.czf.student.helper.LocalPreferences
 import com.czf.student.helper.NetWork
 import com.czf.student.helper.StringResourceGetter
 import kotlinx.android.synthetic.main.fragment_edit_information.*
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class EditInformation:Fragment() {
+class EditInformation: Fragment() {
+    @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_edit_information,null)
     }
@@ -60,7 +62,7 @@ class EditInformation:Fragment() {
 
             when(typeSelector.selectedItemPosition){
                 0 -> {
-                    GlobalScope.launch {
+                    lifecycleScope.launch {
                         val result=NetWork.superModify("student",studentInfo.student)
                         if(result)
                             PopUpNews.showGoodNews(activity!!,StringResourceGetter.getString(R.string.modify_success))
@@ -69,7 +71,7 @@ class EditInformation:Fragment() {
                     }
                 }
                 1 -> {
-                    GlobalScope.launch {
+                    lifecycleScope.launch {
                         val result=NetWork.superModify("teacher",teacherInfo.teacher)
                         if(result)
                             PopUpNews.showGoodNews(activity!!,StringResourceGetter.getString(R.string.modify_success))
@@ -78,7 +80,7 @@ class EditInformation:Fragment() {
                     }
                 }
                 2 -> {
-                    GlobalScope.launch {
+                    lifecycleScope.launch {
                         val result=NetWork.superModify("course",courseInfo.course)
                         if(result)
                             PopUpNews.showGoodNews(activity!!,StringResourceGetter.getString(R.string.modify_success))

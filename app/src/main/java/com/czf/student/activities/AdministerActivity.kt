@@ -1,13 +1,13 @@
 package com.czf.student.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.czf.student.R
 import com.czf.student.fragments.administer.AddCourse
 import com.czf.student.fragments.administer.EditInformation
 import com.czf.student.fragments.administer.Score
 import com.czf.student.fragments.administer.SelectCourse
-import kotlinx.android.synthetic.main.activity_teacher.*
+import kotlinx.android.synthetic.main.activity_administer.*
 import nl.joery.animatedbottombar.AnimatedBottomBar
 
 class AdministerActivity : AppCompatActivity() {

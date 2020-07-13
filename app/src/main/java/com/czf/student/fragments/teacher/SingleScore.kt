@@ -11,17 +11,17 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.czf.student.R
 import com.czf.student.beans.CourseScore
 import com.czf.student.helper.LocalPreferences
 import com.czf.student.helper.NetWork
 import com.czf.student.helper.StringResourceGetter
 import kotlinx.android.synthetic.main.fragment_student_score.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class SingleScore:Fragment() {
+class SingleScore: Fragment() {
+    @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_student_score,null)
     }
@@ -34,7 +34,7 @@ class SingleScore:Fragment() {
         searchBar.inputType= InputType.TYPE_CLASS_NUMBER
 
         searchButton.setOnClickListener {
-            GlobalScope.launch(Dispatchers.Main) {
+            lifecycleScope.launch {
                 val stuId=try {
                     searchBar.text.toString().toInt()
                 }
@@ -60,7 +60,7 @@ class SingleScore:Fragment() {
             if(position==0){
                 val textView= TextView(activity)
                 textView.text=StringResourceGetter.getString(R.string.unknown)
-                GlobalScope.launch(Dispatchers.Main) {
+                lifecycleScope.launch {
                     val stuId=try {
                         searchBar.text.toString().toInt()
                     }

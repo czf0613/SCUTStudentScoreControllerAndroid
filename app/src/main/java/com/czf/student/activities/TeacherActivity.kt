@@ -1,14 +1,13 @@
 package com.czf.student.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.czf.student.R
 import com.czf.student.fragments.teacher.AverageScore
 import com.czf.student.fragments.teacher.EditScore
 import com.czf.student.fragments.teacher.SelfInfo
 import com.czf.student.fragments.teacher.SingleScore
 import kotlinx.android.synthetic.main.activity_teacher.*
-
 import nl.joery.animatedbottombar.AnimatedBottomBar
 
 class TeacherActivity : AppCompatActivity() {

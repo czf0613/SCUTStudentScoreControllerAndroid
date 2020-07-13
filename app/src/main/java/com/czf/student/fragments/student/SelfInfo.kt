@@ -1,23 +1,24 @@
 package com.czf.student.fragments.student
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.czf.student.R
 import com.czf.student.helper.LocalPreferences
 import com.czf.student.helper.NetWork
 import com.czf.student.helper.StringResourceGetter
 import kotlinx.android.synthetic.main.fragment_self_information.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SelfInfo:Fragment() {
+class SelfInfo: Fragment() {
+    @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_self_information,null)
     }
@@ -25,7 +26,7 @@ class SelfInfo:Fragment() {
     override fun onStart() {
         super.onStart()
         Glide.with(this).load(R.mipmap.person).into(icon)
-        GlobalScope.launch(Dispatchers.Main) {
+        lifecycleScope.launch {
             val student=NetWork.getStudentInfo(LocalPreferences.getInt("id")?:1)
             val simpleDateFormat=SimpleDateFormat("yyyy-MM-dd", Locale.CHINA)
             userId.text=student?.id.toString()

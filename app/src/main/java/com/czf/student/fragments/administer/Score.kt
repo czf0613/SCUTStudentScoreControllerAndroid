@@ -15,6 +15,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.czf.student.R
 import com.czf.student.beans.CourseScore
 import com.czf.student.dialogs.PopUpNews
@@ -22,22 +23,18 @@ import com.czf.student.helper.NetWork
 import com.czf.student.helper.StringResourceGetter
 import com.thecode.aestheticdialogs.AestheticDialog
 import kotlinx.android.synthetic.main.fragment_overview_score.*
-import kotlinx.android.synthetic.main.fragment_overview_score.scoreListView
-import kotlinx.android.synthetic.main.fragment_overview_score.searchBar
-import kotlinx.android.synthetic.main.fragment_overview_score.searchButton
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class Score:Fragment() {
+class Score: Fragment() {
+    @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_overview_score,null)
     }
 
     private var checkType = 0
-    lateinit var singleScoreAdapter: SingleScoreAdapter
-    lateinit var avgScoreAdapter: AvgScoreAdapter
+    private lateinit var singleScoreAdapter: SingleScoreAdapter
+    private lateinit var avgScoreAdapter: AvgScoreAdapter
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onStart() {
@@ -67,13 +64,13 @@ class Score:Fragment() {
             }
             when(checkType){
                 0 -> {
-                    GlobalScope.launch(Dispatchers.Main) {
+                    lifecycleScope.launch {
                         singleScoreAdapter=SingleScoreAdapter(ArrayList(NetWork.getScore(value)))
                         scoreListView.adapter=singleScoreAdapter
                     }
                 }
                 1 -> {
-                    GlobalScope.launch(Dispatchers.Main){
+                    lifecycleScope.launch{
                         val result=ArrayList(NetWork.getOverallAvgScore())
                         result.removeIf { it.course!=value&&value!=0 }
                         avgScoreAdapter=AvgScoreAdapter(result)
@@ -97,7 +94,7 @@ class Score:Fragment() {
             if(position==0){
                 val textView= TextView(activity)
                 textView.text= StringResourceGetter.getString(R.string.unknown)
-                GlobalScope.launch(Dispatchers.Main) {
+                lifecycleScope.launch {
                     val stuId=try {
                         searchBar.text.toString().toInt()
                     }
@@ -159,7 +156,7 @@ class Score:Fragment() {
                                 AestheticDialog.WARNING)
                             score.score
                         }
-                        GlobalScope.launch(Dispatchers.Main) {
+                        lifecycleScope.launch {
                             val result= NetWork.modifyScore(stuId,score.course,value)
                             if(result){
                                 PopUpNews.showGoodNews(activity!!, StringResourceGetter.getString(R.string.modify_success))

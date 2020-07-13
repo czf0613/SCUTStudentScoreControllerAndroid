@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.czf.student.R
 import com.czf.student.beans.CourseScore
 import com.czf.student.dialogs.PopUpNews
@@ -21,12 +22,11 @@ import com.czf.student.helper.NetWork
 import com.czf.student.helper.StringResourceGetter
 import com.thecode.aestheticdialogs.AestheticDialog
 import kotlinx.android.synthetic.main.fragment_student_score.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class EditScore:Fragment() {
+class EditScore: Fragment() {
+    @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_student_score,null)
     }
@@ -39,7 +39,7 @@ class EditScore:Fragment() {
         searchBar.inputType= InputType.TYPE_CLASS_NUMBER
 
         searchButton.setOnClickListener {
-            GlobalScope.launch(Dispatchers.Main) {
+            lifecycleScope.launch {
                 val stuId=try {
                     searchBar.text.toString().toInt()
                 }
@@ -65,7 +65,7 @@ class EditScore:Fragment() {
             if(position==0){
                 val textView= TextView(activity)
                 textView.text= StringResourceGetter.getString(R.string.unknown)
-                GlobalScope.launch(Dispatchers.Main) {
+                lifecycleScope.launch {
                     val stuId=try {
                         searchBar.text.toString().toInt()
                     }
@@ -124,7 +124,7 @@ class EditScore:Fragment() {
                             AestheticDialog.showEmotion(activity,StringResourceGetter.getString(R.string.error),StringResourceGetter.getString(R.string.type_error),AestheticDialog.WARNING)
                             score.score
                         }
-                        GlobalScope.launch(Dispatchers.Main) {
+                        lifecycleScope.launch {
                             val result=NetWork.modifyScore(stuId,score.course,value)
                             if(result){
                                 PopUpNews.showGoodNews(activity!!,StringResourceGetter.getString(R.string.modify_success))

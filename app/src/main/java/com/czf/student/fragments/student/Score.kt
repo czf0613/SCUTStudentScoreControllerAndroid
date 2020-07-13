@@ -11,19 +11,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.czf.student.R
 import com.czf.student.beans.CourseScore
 import com.czf.student.helper.LocalPreferences
 import com.czf.student.helper.NetWork
-import com.czf.student.helper.StringResourceGetter
 import kotlinx.android.synthetic.main.fragment_student_score.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class Score:Fragment() {
+class Score: Fragment() {
+    @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_student_score,null)
     }
@@ -44,7 +42,7 @@ class Score:Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                GlobalScope.launch(Dispatchers.Main) {
+                lifecycleScope.launch {
                     val tempList=ArrayList<CourseScore>()
                     for(i in scoreList)
                         if(i.course.toString().contains(s?:"")||i.courseName.contains(s?:""))
@@ -102,7 +100,7 @@ class Score:Fragment() {
     private fun refresh(){
         searchBar.text.clear()
 
-        GlobalScope.launch(Dispatchers.Main) {
+        lifecycleScope.launch {
             scoreList= ArrayList(NetWork.getScore(LocalPreferences.getInt("id")?:1))
             scoreListView.adapter=ScoreAdapter(scoreList)
         }

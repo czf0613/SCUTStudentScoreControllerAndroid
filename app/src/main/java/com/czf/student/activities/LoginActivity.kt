@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.czf.student.R
 import com.czf.student.dialogs.Register
@@ -13,8 +14,6 @@ import com.czf.student.helper.NetWork
 import com.czf.student.helper.StringResourceGetter
 import com.thecode.aestheticdialogs.AestheticDialog
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
@@ -53,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
             val editText=EditText(this)
             editText.maxLines=1
             editText.hint= StringResourceGetter.getString(R.string.url_hint)
-            editText.setText(LocalPreferences.getString("ip")?:"http://")
+            editText.setText(LocalPreferences.getString("ip")?:"http://106.54.9.186:23333")
             editText.setSelection(editText.text.length)
 
             AlertDialog.Builder(this)
@@ -86,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
                 else -> "student"
             }
 
-            GlobalScope.launch(Dispatchers.Main){
+            lifecycleScope.launch{
                 when(NetWork.login(type,userNameEditText.text.toString(),passwordEditText.text.toString())){
                     200->{
                         LocalPreferences.put("userName",userNameEditText.text.toString())

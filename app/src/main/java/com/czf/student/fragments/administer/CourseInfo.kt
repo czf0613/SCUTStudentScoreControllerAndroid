@@ -1,5 +1,6 @@
 package com.czf.student.fragments.administer
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.czf.student.R
 import com.czf.student.beans.Course
@@ -17,15 +19,14 @@ import com.czf.student.helper.NetWork
 import com.czf.student.helper.StringResourceGetter
 import com.thecode.aestheticdialogs.AestheticDialog
 import kotlinx.android.synthetic.main.element_course_info.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.sql.Date
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CourseInfo(private val courseId:Int):Fragment() {
+class CourseInfo(private val courseId:Int): Fragment() {
+    @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.element_course_info,null)
     }
@@ -37,11 +38,11 @@ class CourseInfo(private val courseId:Int):Fragment() {
         super.onStart()
         Glide.with(this).load(R.mipmap.person).into(coursePic)
 
-        GlobalScope.launch(Dispatchers.Main) {
+        lifecycleScope.launch {
             course=NetWork.getCourseInfo(courseId)?: Course(0,"", emptyList(),0.0, emptyList(), Date(System.currentTimeMillis()), Date(System.currentTimeMillis()), emptyList())
             courseID.text=course.id.toString()
             courseName.text=course.courseName
-            GlobalScope.launch(Dispatchers.Main) { courseTeacher.text=NetWork.getTeacherNamesWithId(course.teachers?: emptyList()) }
+            lifecycleScope.launch { courseTeacher.text=NetWork.getTeacherNamesWithId(course.teachers?: emptyList()) }
             courseCredit.text=String.format("%.1f",course.credit)
             courseStartDate.text=simpleDateFormat.format(course.startDate)
             courseEndDate.text=simpleDateFormat.format(course.endDate)
@@ -126,13 +127,13 @@ class CourseInfo(private val courseId:Int):Fragment() {
                             ids.add(value)
                         }
                         catch (e:Exception){
-                            GlobalScope.launch {
+                            lifecycleScope.launch {
                                 PopUpNews.showBadNews(activity!!,StringResourceGetter.getString(R.string.type_error))
                             }
                         }
                     }
                     course.teachers=ids
-                    GlobalScope.launch(Dispatchers.Main) { courseTeacher.text=NetWork.getTeacherNamesWithId(course.teachers?: emptyList()) }
+                    lifecycleScope.launch { courseTeacher.text=NetWork.getTeacherNamesWithId(course.teachers?: emptyList()) }
                 }
                 .show()
         }

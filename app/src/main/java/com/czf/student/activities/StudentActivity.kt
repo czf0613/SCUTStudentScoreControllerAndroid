@@ -1,7 +1,7 @@
 package com.czf.student.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.czf.student.R
 import com.czf.student.fragments.student.CourseInfo
 import com.czf.student.fragments.student.Score
