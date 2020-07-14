@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.czf.student.R
 import com.czf.student.dialogs.PopUpNews
 import com.czf.student.helper.LocalPreferences
@@ -54,6 +55,45 @@ class EditInformation: Fragment() {
             }
             ableToClick=true
             transaction.commit()
+        }
+
+        resetPassword.setOnClickListener {
+            val page=typeSelector.selectedItemPosition
+            if(page==2)
+                return@setOnClickListener
+
+            when(page){
+                0 -> {
+                    SweetAlertDialog(activity!!,SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText(R.string.reset_password)
+                        .setContentText(StringResourceGetter.getString(R.string.reset_password_hint))
+                        .setConfirmButton(R.string.confirm) { lifecycleScope.launch {
+                            val result=NetWork.resetPassword(studentInfo.student.id)
+                            if(result){
+                                PopUpNews.showGoodNews(activity!!,StringResourceGetter.getString(R.string.modify_success))
+                                it.dismiss()
+                            }
+                            else
+                                PopUpNews.showBadNews(activity!!,StringResourceGetter.getString(R.string.modify_fail))
+                        } }
+                        .show()
+                }
+                1 -> {
+                    SweetAlertDialog(activity!!,SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText(R.string.reset_password)
+                        .setContentText(StringResourceGetter.getString(R.string.reset_password_hint))
+                        .setConfirmButton(R.string.confirm) { lifecycleScope.launch {
+                            val result=NetWork.resetPassword(teacherInfo.teacher.id)
+                            if(result){
+                                PopUpNews.showGoodNews(activity!!,StringResourceGetter.getString(R.string.modify_success))
+                                it.dismiss()
+                            }
+                            else
+                                PopUpNews.showBadNews(activity!!,StringResourceGetter.getString(R.string.modify_fail))
+                        } }
+                        .show()
+                }
+            }
         }
 
         confirmModify.setOnClickListener {

@@ -72,6 +72,50 @@ object NetWork {
         }
     }
 
+    suspend fun resetPassword(userId:Int):Boolean {
+        return withContext(Dispatchers.IO){
+            val formBody=FormBody.Builder()
+                .add("userId", userId.toString())
+                .build()
+
+            val request=Request.Builder()
+                .url("${LocalPreferences.getString("ip")}/administer/resetPassword")
+                .post(formBody)
+                .build()
+
+            try {
+                val response: Response = shortClient.newCall(request).execute()
+                response.code==200
+            }
+            catch (e:Exception){
+                false
+            }
+        }
+    }
+
+    suspend fun modifyPassword(userName:String,password: String,newPassword:String):String {
+        return withContext(Dispatchers.IO){
+            val formBody=FormBody.Builder()
+                .add("userName", userName)
+                .add("password", SHA.passwordEncode(password))
+                .add("newPassword",SHA.passwordEncode(newPassword))
+                .build()
+
+            val request=Request.Builder()
+                .url("${LocalPreferences.getString("ip")}/modify")
+                .post(formBody)
+                .build()
+
+            try {
+                val response: Response = shortClient.newCall(request).execute()
+                response.body?.string()?:StringResourceGetter.getString(R.string.unknown_error)
+            }
+            catch (e:Exception){
+                StringResourceGetter.getString(R.string.unknown_error)
+            }
+        }
+    }
+
     suspend fun getStudentInfo(id:Int):Student?{
         return withContext(Dispatchers.IO){
             val request=Request.Builder()
@@ -192,6 +236,26 @@ object NetWork {
         }
     }
 
+    suspend fun getStudentNameWithId(id:Int):String {
+        return withContext(Dispatchers.IO) {
+            val request = Request.Builder()
+                .url("${LocalPreferences.getString("ip")}/student/$id/name")
+                .get()
+                .build()
+
+            try {
+                val response = shortClient.newCall(request).execute()
+                if (response.code == 200)
+                    response.body!!.string()
+                else
+                    StringResourceGetter.getString(R.string.unknown)
+            }
+            catch (e: Exception) {
+                StringResourceGetter.getString(R.string.unknown)
+            }
+        }
+    }
+
     suspend fun selectCourse(id:Int,courses:List<Int>):Boolean {
         return withContext(Dispatchers.IO){
             val formBody=FormBody.Builder()
@@ -239,6 +303,22 @@ object NetWork {
                 JSON.parseArray(response.body!!.string(),CourseScore::class.java)
             else
                 emptyList()
+        }
+    }
+
+    suspend fun getCourseById(id:Int):String {
+        return withContext(Dispatchers.IO){
+            val request=Request.Builder()
+                .url("${LocalPreferences.getString("ip")}/administer/getCourse/$id/name")
+                .get()
+                .build()
+
+            val response= shortClient.newCall(request).execute()
+
+            if(response.code==200)
+                response.body!!.string()
+            else
+                StringResourceGetter.getString(R.string.unknown_error)
         }
     }
 
@@ -340,6 +420,27 @@ object NetWork {
             val response= shortClient.newCall(request).execute()
 
             response.code==200
+        }
+    }
+
+    suspend fun submitScore(content:List<Score>):String?{
+        return withContext(Dispatchers.IO){
+            val formBody=FormBody.Builder()
+                .add("teacherId", LocalPreferences.getInt("id").toString())
+                .add("content",JSON.toJSONString(content))
+                .build()
+
+            val request=Request.Builder()
+                .url("${LocalPreferences.getString("ip")}/teacher/addScore")
+                .post(formBody)
+                .build()
+
+            val response= shortClient.newCall(request).execute()
+
+            if(response.code==200)
+                null
+            else
+                response.body?.string()?:StringResourceGetter.getString(R.string.unknown_error)
         }
     }
 }

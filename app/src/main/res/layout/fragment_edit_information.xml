@@ -67,12 +67,30 @@
         android:layout_weight="1"
         android:id="@+id/editInterface"/>
 
-    <Button
-        android:layout_width="250dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/confirm"
-        android:layout_margin="5dp"
-        android:textSize="20sp"
-        android:id="@+id/confirmModify"/>
+        android:orientation="horizontal"
+        android:layout_margin="5dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/reset_password"
+            android:layout_margin="5dp"
+            android:layout_weight="0.5"
+            android:textSize="20sp"
+            android:id="@+id/resetPassword"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:text="@string/confirm"
+            android:layout_margin="5dp"
+            android:textSize="20sp"
+            android:id="@+id/confirmModify"/>
+    </LinearLayout>
 </LinearLayout>

@@ -26,7 +26,6 @@ object SHA {
     }
 
     fun passwordEncode(rawPassword:String):String{
-        return sha256("${sha256(rawPassword.toUpperCase(Locale.ROOT))}${rawPassword.toLowerCase(Locale.ROOT)}").toUpperCase(
-            Locale.ROOT)
+        return sha256("${sha256(rawPassword.toUpperCase(Locale.ROOT))}${rawPassword.toLowerCase(Locale.ROOT)}").toUpperCase(Locale.ROOT)
     }
 }

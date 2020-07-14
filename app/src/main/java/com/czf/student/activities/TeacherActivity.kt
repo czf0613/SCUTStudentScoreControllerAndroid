@@ -6,13 +6,13 @@ import com.czf.student.R
 import com.czf.student.fragments.teacher.AverageScore
 import com.czf.student.fragments.teacher.EditScore
 import com.czf.student.fragments.teacher.SelfInfo
-import com.czf.student.fragments.teacher.SingleScore
+import com.czf.student.fragments.teacher.InputScore
 import kotlinx.android.synthetic.main.activity_teacher.*
 import nl.joery.animatedbottombar.AnimatedBottomBar
 
 class TeacherActivity : AppCompatActivity() {
     private val selfInfo by lazy { SelfInfo() }
-    private val singleScore by lazy { SingleScore() }
+    private val singleScore by lazy { InputScore() }
     private val averageScore by lazy { AverageScore() }
     private val editScore by lazy { EditScore() }
 

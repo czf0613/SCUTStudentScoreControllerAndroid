@@ -20,7 +20,8 @@ class MainActivity : AppCompatActivity() {
 
         val countDownTimer=object :CountDownTimer(3000,30){
             override fun onFinish() {
-                LocalPreferences.put("ip","http://106.54.9.186:23333")
+                if(LocalPreferences.getString("ip")==null)
+                    LocalPreferences.put("ip","http://106.54.9.186:23333")
                 val intent=Intent(this@MainActivity,
                     LoginActivity::class.java)
                 startActivity(intent)

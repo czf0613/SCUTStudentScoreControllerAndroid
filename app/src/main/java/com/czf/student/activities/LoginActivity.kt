@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.czf.student.R
+import com.czf.student.dialogs.ModifyPassword
 import com.czf.student.dialogs.Register
 import com.czf.student.helper.LocalPreferences
 import com.czf.student.helper.NetWork
@@ -46,6 +47,10 @@ class LoginActivity : AppCompatActivity() {
 
         register.setOnClickListener {
             Register(this).show()
+        }
+
+        modifyPassword.setOnClickListener {
+            ModifyPassword(this).show()
         }
 
         setIP.setOnClickListener {
