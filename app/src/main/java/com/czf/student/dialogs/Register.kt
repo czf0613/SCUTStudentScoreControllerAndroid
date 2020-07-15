@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class Register(context: Context) : Dialog(context) {
-    private val simpleDateFormat=SimpleDateFormat("yyyy-MM-dd", Locale.CHINA)
+    private val simpleDateFormat by lazy { SimpleDateFormat("yyyy-MM-dd", Locale.CHINA) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +40,10 @@ class Register(context: Context) : Dialog(context) {
         super.onStart()
         birthday.setOnClickListener {
             DatePickerDialog(context,simpleDateFormat.parse(birthday.text.toString()),object :DatePickerDialog.DatePickerListener{
-            override fun dateChange(dateString: String) {
-                birthday.text = dateString
-            }
-        }).show()
+                override fun dateChange(dateString: String) {
+                    birthday.text = dateString
+                }
+            }).show()
         }
 
         enrollmentTime.setOnClickListener {

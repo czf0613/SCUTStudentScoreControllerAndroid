@@ -151,7 +151,7 @@ class InputScore: Fragment() {
             scoreText.setOnClickListener {
                 val editText= EditText(activity)
                 editText.maxLines=1
-                editText.inputType= InputType.TYPE_NUMBER_FLAG_DECIMAL
+                editText.inputType= InputType.TYPE_CLASS_NUMBER
                 editText.hint= StringResourceGetter.getString(R.string.score_hint)
                 editText.setText(scoreText.text)
                 editText.setSelection(editText.text.length)

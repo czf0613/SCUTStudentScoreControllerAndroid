@@ -22,8 +22,7 @@ class MainActivity : AppCompatActivity() {
             override fun onFinish() {
                 if(LocalPreferences.getString("ip")==null)
                     LocalPreferences.put("ip","http://106.54.9.186:23333")
-                val intent=Intent(this@MainActivity,
-                    LoginActivity::class.java)
+                val intent=Intent(this@MainActivity, LoginActivity::class.java)
                 startActivity(intent)
                 this@MainActivity.finish()
             }

@@ -267,9 +267,13 @@ object NetWork {
                 .post(formBody)
                 .build()
 
-            var response= shortClient.newCall(request).execute()
-
-            response.code==200
+            try{
+                val response= shortClient.newCall(request).execute()
+                response.code==200
+            }
+            catch (e:Exception){
+                false
+            }
         }
     }
 
@@ -284,9 +288,13 @@ object NetWork {
                 .post(formBody)
                 .build()
 
-            val response= shortClient.newCall(request).execute()
-
-            response.code==200
+            try{
+                val response= shortClient.newCall(request).execute()
+                response.code==200
+            }
+            catch (e:Exception){
+                false
+            }
         }
     }
 
@@ -297,12 +305,17 @@ object NetWork {
                 .get()
                 .build()
 
-            val response= shortClient.newCall(request).execute()
+            try {
+                val response= shortClient.newCall(request).execute()
 
-            if(response.code==200)
-                JSON.parseArray(response.body!!.string(),CourseScore::class.java)
-            else
-                emptyList()
+                if(response.code==200)
+                    JSON.parseArray(response.body!!.string(),CourseScore::class.java)
+                else
+                    emptyList()
+            }
+            catch (e:Exception){
+                emptyList<CourseScore>()
+            }
         }
     }
 
@@ -313,12 +326,17 @@ object NetWork {
                 .get()
                 .build()
 
-            val response= shortClient.newCall(request).execute()
+            try {
+                val response= shortClient.newCall(request).execute()
 
-            if(response.code==200)
-                response.body!!.string()
-            else
+                if(response.code==200)
+                    response.body!!.string()
+                else
+                    StringResourceGetter.getString(R.string.unknown_error)
+            }
+            catch (e:Exception){
                 StringResourceGetter.getString(R.string.unknown_error)
+            }
         }
     }
 
@@ -329,12 +347,17 @@ object NetWork {
                 .get()
                 .build()
 
-            val response= shortClient.newCall(request).execute()
+            try {
+                val response= shortClient.newCall(request).execute()
 
-            if(response.code==200)
-                JSON.parseArray(response.body!!.string(),CourseScore::class.java)
-            else
-                emptyList()
+                if(response.code==200)
+                    JSON.parseArray(response.body!!.string(),CourseScore::class.java)
+                else
+                    emptyList()
+            }
+            catch (e:Exception){
+                emptyList<CourseScore>()
+            }
         }
     }
 
@@ -345,12 +368,17 @@ object NetWork {
                 .get()
                 .build()
 
-            val response= shortClient.newCall(request).execute()
+            try {
+                val response= shortClient.newCall(request).execute()
 
-            if(response.code==200)
-                JSON.parseArray(response.body!!.string(),CourseScore::class.java)
-            else
-                emptyList()
+                if(response.code==200)
+                    JSON.parseArray(response.body!!.string(),CourseScore::class.java)
+                else
+                    emptyList()
+            }
+            catch (e:Exception){
+                emptyList<CourseScore>()
+            }
         }
     }
 
@@ -361,12 +389,17 @@ object NetWork {
                 .get()
                 .build()
 
-            val response= shortClient.newCall(request).execute()
+            try {
+                val response= shortClient.newCall(request).execute()
 
-            if(response.code==200)
-                JSON.parseArray(response.body!!.string(),CourseScore::class.java)
-            else
-                emptyList()
+                if(response.code==200)
+                    JSON.parseArray(response.body!!.string(),CourseScore::class.java)
+                else
+                    emptyList()
+            }
+            catch (e:Exception){
+                emptyList<CourseScore>()
+            }
         }
     }
 
@@ -383,9 +416,13 @@ object NetWork {
                 .post(formBody)
                 .build()
 
-            val response= shortClient.newCall(request).execute()
-
-            response.code==200
+            try{
+                val response= shortClient.newCall(request).execute()
+                response.code==200
+            }
+            catch (e:Exception){
+                false
+            }
         }
     }
 
@@ -400,9 +437,13 @@ object NetWork {
                 .post(formBody)
                 .build()
 
-            val response= shortClient.newCall(request).execute()
-
-            response.code==200
+            try{
+                val response= shortClient.newCall(request).execute()
+                response.code==200
+            }
+            catch (e:Exception){
+                false
+            }
         }
     }
 
@@ -417,9 +458,13 @@ object NetWork {
                 .post(formBody)
                 .build()
 
-            val response= shortClient.newCall(request).execute()
-
-            response.code==200
+            try{
+                val response= shortClient.newCall(request).execute()
+                response.code==200
+            }
+            catch (e:Exception){
+                false
+            }
         }
     }
 
@@ -435,12 +480,17 @@ object NetWork {
                 .post(formBody)
                 .build()
 
-            val response= shortClient.newCall(request).execute()
+            try {
+                val response= shortClient.newCall(request).execute()
 
-            if(response.code==200)
-                null
-            else
-                response.body?.string()?:StringResourceGetter.getString(R.string.unknown_error)
+                if(response.code==200)
+                    null
+                else
+                    response.body?.string()?:StringResourceGetter.getString(R.string.unknown_error)
+            }
+            catch (e:Exception){
+                StringResourceGetter.getString(R.string.unknown_error)
+            }
         }
     }
 }

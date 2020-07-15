@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
                 .setCancelable(false)
                 .setNegativeButton(R.string.cancel,null)
                 .setPositiveButton(R.string.confirm) { _, _ ->
-                    val pattern= Pattern.compile("((http|https)://)(([a-zA-Z0-9\\._-]+\\.[a-zA-Z]{2,6})|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,5})")
+                    val pattern= Pattern.compile("((http|https)://)(([a-zA-Z0-9._-]+\\.[a-zA-Z]{2,6})|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,5})")
                     val matcher=pattern.matcher(editText.text.toString())
                     if(matcher.matches()) {
                         LocalPreferences.put("ip", editText.text.toString())

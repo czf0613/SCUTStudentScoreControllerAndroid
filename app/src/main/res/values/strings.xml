@@ -73,7 +73,7 @@
     <string name="course_score">成绩：</string>
     <string name="input_score">录入成绩</string>
     <string name="flush_in">写入数据库</string>
-    <string name="average_score">查询平均成绩</string>
+    <string name="average_score">平均成绩</string>
     <string name="my_teaching_avg">我任教课程的平均成绩：</string>
     <string name="score_hint">请输入成绩：</string>
     <string name="edit_score">修改成绩</string>

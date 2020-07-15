@@ -46,7 +46,6 @@ public class BaseBeanManager<T, K>
         mDao.deleteAll();
     }
 
-
     public void update(T item) {
         mDao.update(item);
     }
