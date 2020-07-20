@@ -48,7 +48,7 @@ They are the IDEs we are going to use, be careful that we must use IDEA ultimate
 
 This is the toolkit for us to manage the data base with GUI, but this tool is not for free, if you cannot afford it, just ignore it (It's a little bit expensive).
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716112319188.png" alt="image-20200716112319188" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/HC1BQwVWTScP8pl.png" alt="image-20200716112319188" style="zoom:50%;" />
 
 ### To learn more, see this:
 
@@ -118,7 +118,7 @@ Student_id together with course_id is a key for the table score since it can uni
 
 But, things got complicated because label 4, 5, 6, 7 are many to one or many to many mappings. How to deal with these complex relation ships? I offered two solutions, but you have to think over carefully to identify which one to use.
 
-<img src="C:\Users\13540\Pictures\未标题-4.png" alt="未标题-4" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/1nGDmoOd4hkFzxe.png" alt="未标题-4" style="zoom:50%;" />
 
 ### How to deal with many to one or many to many mappings?
 
@@ -278,7 +278,7 @@ At first, we need to introduce a strong toolkit that helps us communicate with t
 
 Let's consider, if we treat those attributes in the table as private members in a class, that means a row in database is right just an object matching this entity class, isn't it? So we use this strategy to build up a lot of entity classes matching tables and provide a lot of Data Access Objects to help us execute the query commands and map the result to the objects we want. just like this:
 
-![image-20200716114354908](C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716114354908.png)
+![image-20200716114354908](https://i.loli.net/2020/07/20/xnT6XO7UCMcp3zl.png)
 
 ### 1, introduce Entity Class
 
@@ -458,7 +458,7 @@ https://space.bilibili.com/38666989/channel/detail?cid=137475
 
 I have prepared all the stuff in detail:
 
-![image-20200716121252834](C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716121252834.png)
+![image-20200716121252834](https://i.loli.net/2020/07/20/npXrFYvyqxBt6Sz.png)
 
 
 
@@ -475,9 +475,9 @@ https://space.bilibili.com/38666989/channel/detail?cid=138765
 
 I will show you how to use a marvelous language called Kotlin to build an Android App.
 
-![image-20200716121641022](C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716121641022.png)
+![image-20200716121641022](https://i.loli.net/2020/07/20/JyOz96pjrFDXokx.png)
 
-![image-20200716121717402](C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716121717402.png)
+![image-20200716121717402](https://i.loli.net/2020/07/20/e5tgRE23JnNQIS8.png)
 
 
 
@@ -550,7 +550,7 @@ studentIdEditText.addTextChangedListener(object :TextWatcher{
 
 in this way, we make the debounce function with the help of coroutines.
 
-![img](https://img-blog.csdn.net/20180705005109564?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1cGlhbjE5ODk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![img](https://i.loli.net/2020/07/20/Z9zTP43fwIsRV5k.png)
 
 To see more:
 
@@ -573,15 +573,15 @@ https://github.com/czf0613/SCUTStudentScoreControllerWeb/releases/tag/1.0
 
 If you do not have a server with public IP, please make sure that your phone and your computer is in the same LAN (local area network) that starts with 192.168.x.x, you can check it out in your task manager:
 
-<img src="C:\Users\13540\Pictures\微信截图_20200716142657.png" alt="微信截图_20200716142657" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/JYeghmyfI8naOlK.png" alt="微信截图_20200716142657" style="zoom:50%;" />
 
 ### Then open the console, execute the command java -jar xxxx.jar(xxxx is the name of the server jar package)
 
-![image-20200716143115079](C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716143115079.png)
+![image-20200716143115079](https://i.loli.net/2020/07/20/nJHq8i3Sxg6fYQr.png)
 
 then you can see the server is running with logs:
 
-![image-20200716143244159](C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716143244159.png)
+![image-20200716143244159](https://i.loli.net/2020/07/20/1m3V2rU8ZOQjpuz.png)
 
 if you are in troubles, please check:
 
@@ -607,7 +607,7 @@ https://github.com/czf0613/SCUTStudentScoreControllerAndroid/releases/tag/1.0
 
 ### 1, configure the server url, click the button on the right.
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716144733782.png" alt="image-20200716144733782" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/HcJolmQDI9rvwXx.png" alt="image-20200716144733782" style="zoom:50%;" />
 
 the url has regex type checking, you must input the string that starts with http or https and end with the port number, for example, http://192.168.0.1:23333 or http://www.baidu.com:80
 
@@ -642,23 +642,23 @@ student functions are easy. Be reminded that, one course could have multiple tea
 
 #### 1,student information
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716145634574.png" alt="image-20200716145634574" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/sxtMST6bVaQcYnU.png" alt="image-20200716145634574" style="zoom:50%;" />
 
 #### 2, searching course informations
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716145804101.png" alt="image-20200716145804101" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/7fOxzsreIAgv4MK.png" alt="image-20200716145804101" style="zoom:50%;" />
 
 #### 3, selecting course
 
 you can press plus to choose this course, and also you can press minus to remove this course. If you click fast and trigger twice, don't worry, I have already done the concurrent control, you data is safe, you won't select it twice.
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716150131211.png" alt="image-20200716150131211" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/VIj9TAsFzN6diC8.png" alt="image-20200716150131211" style="zoom:50%;" />
 
 #### 4, searching your score
 
 input course_id or course_name then the filter will help you.
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716150255438.png" alt="image-20200716150255438" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/ILbpOVuH96TSFYd.png" alt="image-20200716150255438" style="zoom:50%;" />
 
 
 
@@ -668,29 +668,29 @@ different teacher will receive different data, so you need to remind the role co
 
 #### 1, self information
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716150419558.png" alt="image-20200716150419558" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/w6xF4KnTPkVl8eX.png" alt="image-20200716150419558" style="zoom:50%;" />
 
 #### 2, input score
 
 you need to input student id at first, for example, student 8 is czf. Then the interface would refresh. Be reminded that you can only see the scores from the course you are teaching, for example, teacher1 is teaching 算法 and 数据库, so she can only receive data from these courses:
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716151521749.png" alt="image-20200716151521749" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/aky3ZWXwlmb4vhH.png" alt="image-20200716151521749" style="zoom:50%;" />
 
 #### 3, average score
 
 Like interface 2, you can only receive data from those courses your are teaching. Also, it has a filter above.
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716151651694.png" alt="image-20200716151651694" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/G4xZhomCcw5vYQW.png" alt="image-20200716151651694" style="zoom:50%;" />
 
 #### 4, edit score
 
 input student_id and press the button to search, press the score digit, then you can edit the score.
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716151836421.png" alt="image-20200716151836421" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/bEGJuqi8Xh7AjaU.png" alt="image-20200716151836421" style="zoom:50%;" />
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716151902813.png" alt="image-20200716151902813" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/im1bw2uQJn3dWCU.png" alt="image-20200716151902813" style="zoom:50%;" />
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716151918918.png" alt="image-20200716151918918" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/8vhqsYt7rzXIEgu.png" alt="image-20200716151918918" style="zoom:50%;" />
 
 then the score of Database course is 75.
 
@@ -704,7 +704,7 @@ it's more complex since he can manage all the data.
 
 select the spinner then you can choose the information to show, then input the id.
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716152351014.png" alt="image-20200716152351014" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/XtL9zwIlh6xeOR8.png" alt="image-20200716152351014" style="zoom:50%;" />
 
 you can reset student or teacher password or you can modify their information by clicking "确定" button. If you do not click "确定", the edition will not be saved.
 
@@ -712,23 +712,23 @@ you can reset student or teacher password or you can modify their information by
 
 this is the over view checker, you can see all scores from a students, or you can see all the average scores of any teacher
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716152701900.png" alt="image-20200716152701900" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/SITc2w5mfBMZ8Jv.png" alt="image-20200716152701900" style="zoom:50%;" />
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716152720060.png" alt="image-20200716152720060" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/EB4de6ZAQG8DmCg.png" alt="image-20200716152720060" style="zoom:50%;" />
 
 #### 3, course selecting
 
 you can see course selected by one student and you can modify their selections
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716152833529.png" alt="image-20200716152833529" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/heZ8Tft5Insb26X.png" alt="image-20200716152833529" style="zoom:50%;" />
 
 also, you can see the courses offered by a certain teacher:
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716152932553.png" alt="image-20200716152932553" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/DbHuLJcAqxjnVQR.png" alt="image-20200716152932553" style="zoom:50%;" />
 
 #### 4, add a course
 
-<img src="C:\Users\13540\AppData\Roaming\Typora\typora-user-images\image-20200716153017655.png" alt="image-20200716153017655" style="zoom:50%;" />
+<img src="https://i.loli.net/2020/07/20/eMfCUhd26KrEajZ.png" alt="image-20200716153017655" style="zoom:50%;" />
 
 
 
