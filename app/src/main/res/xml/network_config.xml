@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<network-security-config>
+<network-security-config xmlns:tools="http://schemas.android.com/tools">
     <base-config cleartextTrafficPermitted="true" >
         <trust-anchors>
             <!-- 信任系统预装 CA 证书 -->
             <certificates src="system" />
             <!-- 信任用户添加的 CA 证书 -->
-            <certificates src="user" />
+            <certificates src="user"
+                tools:ignore="AcceptsUserCertificates" />
         </trust-anchors>
     </base-config>
 </network-security-config>
