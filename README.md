@@ -60,23 +60,15 @@ https://www.bilibili.com/video/BV1mv411B77g
 
 ## Why we don't use C# together with SQL Server?
 
-### 1, Microsoft's ODBC driver has been a disrepair project for a long time.
-
-Connecting to a new database or a new data type, it is easy to have all kinds of bugs. At that time, our students will probably waste a lot of time due to various bedbugs. In particular, the compatibility of SQL server or access database after 2010 with visual studio is a mystery. Numerous patches and adjustments are needed to run normally (maybe my vs version is too new, but in short, it is not very friendly).
-
-### 2, C# has poor support for the types in Data Base.
+### 1, C# has poor support for the types in Data Base.
 
 For example, time type, JSON type and blob type can not be supported by C# (if you really want to get it, you need to use .Net instead of native C#), and even use byte array (byte[ ], excuse me, would you like to use this one in your program?) to deal with corresponding data type. WinForm and WPF technologies for building window programs are not used for database operation in any case, so in fact, this work should be handed over to the really suitable language. Therefore, my idea is that, with my ability, I can hand in two kinds of assignments: one is java web project, which is the real main battlefield of database; the other is android app, which uses SQLite database in android app, which is a very stable operation and not difficult to learn.
 
-### 3, Lack of the  concept of connection pool.
+### 2, Lack of the  concept of connection pool.
 
 To do database business development, in fact, there is a very important concept that has not been covered in the class. This is database connection. Real database access is often not a single thread, so how to schedule multiple tasks with multiple threads requires a connection pool to help us manage (or you can also use singleton instance & synchronized methods, but these design patterns are estimated to be understood by no other students in our class). It can reduce the waste of unnecessary resources and recycle zombie threads in time. However, native C# doesn't have these things, so the students will end up with: every time we operate the database, we will open a database connection, then execute SQL, and finally close the connection. This is actually a huge misunderstanding of the use of the database. Although most of the students may have searched for information, or wrote code like this unintentionally, it is not very good to operate in this way.
 
-### 4, WinForm and WPF are very old.
-
-WinForm and WPF are both old technologies that are about to catch up with our ages. I saw that the teacher's demo also had things like GridView and GridLayout. To tell the truth, the situation here could be so complicated that most people waste a long time just by displaying the data in the grid. I don't think you want to be bombarded by a lot of problems that are not related to the database, do you? Again The compatibility of Microsoft. Net framework is notoriously bad (because the framework actually depends on the long dead Windows 7. In addition, now Microsoft is integrating .Net core, the project names and columns in Visual Studio are all in a mess, and there are more than a dozen options for a form application alone). Maybe your teachers can't run the assignments handed in by students.
-
-### 5, The last one is actually due to my selfishness.
+### 3, The last one is actually due to my selfishness.
 
 Because my commercial development mainly uses MySQL and non relational databases, SQL server is not free of charge, and the exclusive relationship with .Net is too strong, which makes it almost difficult for me who use MySQL to integrate C# and MySQL (this involves the tricky operation of using byte array to do things. Unless there is ORM, the mapping rules below can really write about to death.)
 
